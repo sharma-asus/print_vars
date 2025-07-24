@@ -17,6 +17,7 @@ on:
   
         - name: Use Secret
           run: |
-            echo "Using secret: ${{ secrets.FIRST_SECRET }}"
+            echo "::add-mask::${{ secrets.FIRST_SECRET }}"
+            echo "Secret is set and masked."
           env:
             MY_SECRET: ${{ secrets.FIRST_SECRET }}
