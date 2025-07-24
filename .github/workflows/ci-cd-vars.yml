@@ -1,21 +1,22 @@
 name: Basic CI workflow
 
-
 on:
   push:
     branches:
       - main
   workflow_dispatch:
 
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-  
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
-  
-        - name: Use Secret
-          run: echo "Using secret: ${{ secrets.FIRST_SECRET }}"
-          env:
-            MY_SECRET: ${{ secrets.FIRST_SECRET }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Use Secret
+        env:
+          MY_SECRET: ${{ secrets.FIRST_SECRET }}
+        run: |
+          echo "::add-mask::${{ secrets.FIRST_SECRET }}"
+          echo "Secret is set and masked."
