@@ -9,14 +9,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: uat
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Use Secret
-        env:
-          MY_SECRET: ${{ secrets.FIRST_SECRET }}
-        run: |
-          echo "::add-mask::${{ secrets.FIRST_SECRET }}"
-          echo "Secret is set and masked."
+      - name: Use a secret from evironment
+        run: echo "The secret is ${{ secrets.FIRST_SECRET }}"
+
+      # - name: Use Secret
+      #   env:
+      #     MY_SECRET: ${{ secrets.FIRST_SECRET }}
+      #   run: |
+      #     echo "::add-mask::${{ secrets.FIRST_SECRET }}"
+      #     echo "Secret is set and masked."
